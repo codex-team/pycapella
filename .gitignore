@@ -1,0 +1,6 @@
+*.pyc
+build
+dist
+pycapella.egg-info
+.DS_Store
+.idea
