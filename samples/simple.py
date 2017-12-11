@@ -1,24 +1,13 @@
-from pycapella import CapellaApi
+import pycapella
 
-api = CapellaApi({})
+api = pycapella.CapellaApi({})
 
+# Save local file 'image.jpg' to the Capella
+response = api.uploadFile("image.jpg")
+assert response['success'] == True
+print("Success! Image URL is {}".format(response['url']))
 
-def upload_file_example():
-    response = api.uploadFile("samples/image.jpg")
-    if response:
-        print("Success! Image URL is {}".format(response['url']))
-    else:
-        print("Error!")
-
-
-def upload_url_example():
-    response = api.uploadUrl("https://capella.pics/532117ec-750f-47eb-b4de-6db8c5ae4781")
-    if response:
-        print("Success! Image URL is {}".format(response['url']))
-    else:
-        print("Error!")
-
-
-if __name__ == "__main__":
-    upload_file_example()
-    upload_url_example()
+# Save remote image by url to the Capella
+response = api.uploadUrl("https://ifmo.su/public/app/img/products/capella.png")
+assert response['success'] == True
+print("Success! Image URL is {}".format(response['url']))
