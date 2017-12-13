@@ -135,8 +135,10 @@ class CapellaApi:
                     url += '/{}/{}x{}&{},{}'.format(filter, *params)
                 elif filter == "pixelize":
                     url += '/{}/{}'.format(filter, params)
-                else:
+                elif filter == 'resize':
                     url += '/{}/{}x{}'.format(filter, *params)
+                else:
+                    raise Exception("Unexpected filter {}".format(filter))
             except Exception as e:
                 logging.error("[upload] error: {}".format(e))
 
