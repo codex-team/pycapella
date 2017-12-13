@@ -29,8 +29,8 @@ def crop_and_resize_image(api):
     print("Success! Image URL is {}".format(api.get_url()))
 
 
-def resize_and_pixelize_in_one_line(api):
-    url = api.pixelize(150).resize(100, 100, 50, 50).resize(1000, 900).pixelize(200).get_url()
+def crop_resize_and_pixelize_in_one_line(api):
+    url = api.pixelize(150).crop(100, 100, 50, 50).resize(1000, 900).pixelize(200).get_url()
     print("Success! Image URL is {}".format(url))
 
 
@@ -44,4 +44,4 @@ if __name__ == "__main__":
 
     upload_file_and_apply_filters(new_image)
     crop_and_resize_image(new_image)
-    resize_and_pixelize_in_one_line(new_image)
+    crop_resize_and_pixelize_in_one_line(new_image)

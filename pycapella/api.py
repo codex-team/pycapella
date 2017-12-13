@@ -77,32 +77,32 @@ class CapellaApi:
 
             return api_response
 
-    def crop(self, width, height=None):
-        """
-        Apply crop filter to the image
-        :param width: crop width
-        :param height: crop height (optional, initially defined as width)
-        :return: self
-        """
-        self.filters.append(('crop', (width, height if height else width)))
-        return self
-
-    def resize(self, width, height=None, left=None, top=None):
+    def resize(self, width, height=None):
         """
         Apply resize filter to the image
-        :param width: resized image width
-        :param height: resized image height (optional, initially defined as width)
-        :param left: resized image left (optional)
-        :param top: resized image top (optional)
+        :param width: resize width
+        :param height: resize height (optional, initially defined as width)
+        :return: self
+        """
+        self.filters.append(('resize', (width, height if height else width)))
+        return self
+
+    def crop(self, width, height=None, left=None, top=None):
+        """
+        Apply resize filter to the image
+        :param width: cropped image width
+        :param height: cropped image height (optional, initially defined as width)
+        :param left: cropped image left (optional)
+        :param top: cropped image top (optional)
         :return: self
         """
         if left and top:
-            self.filters.append(('resize', (width, height if height else width, left, top)))
+            self.filters.append(('crop', (width, height if height else width, left, top)))
         else:
             if left or top:
-                logging.warning("[resize] You should define both left and top params")
+                logging.warning("[crop] You should define both left and top params")
 
-            self.filters.append(('resize', (width, height if height else width)))
+            self.filters.append(('crop', (width, height if height else width)))
         return self
 
     def pixelize(self, size):
@@ -130,7 +130,7 @@ class CapellaApi:
         url = ''
         for filter, params in self.filters:
             try:
-                if filter == "resize" and len(params) == 4:
+                if filter == "crop" and len(params) == 4:
                     url += '/{}/{}x{}&{},{}'.format(filter, *params)
                 elif filter == "pixelize":
                     url += '/{}/{}'.format(filter, params)
