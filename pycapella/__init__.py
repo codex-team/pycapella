@@ -1,1 +1,1 @@
-from .api import CapellaApi
+from .api import Capella

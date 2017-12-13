@@ -1,10 +1,10 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 from os.path import join, dirname
 
 
 setup(name='pycapella',
       packages=['pycapella'],
-      version='0.1.4',
+      version='0.1.5',
       description="Python SDK for capella.pics",
       long_description=open(join(dirname(__file__), 'README.rst')).read(),
       keywords='capella image upload crop resize filter transformation manipulation cdn ',

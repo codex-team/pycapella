@@ -19,7 +19,7 @@ Usage
 
     import pycapella
 
-    api = pycapella.CapellaApi({})
+    api = pycapella.Capella()
 
     # Save local file 'image.jpg' to the Capella
     response = api.upload_file("image.jpg")

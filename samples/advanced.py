@@ -1,7 +1,7 @@
-from pycapella import CapellaApi
+from pycapella import Capella
 
 def upload_file_example():
-    api = CapellaApi()
+    api = Capella()
     response = api.upload_file("../samples/image.jpg")
     if response:
         print("Success! Image URL is {}".format(response['url']))
@@ -10,7 +10,7 @@ def upload_file_example():
 
 
 def upload_url_example():
-    api = CapellaApi()
+    api = Capella()
     response = api.upload_url("https://capella.pics/532117ec-750f-47eb-b4de-6db8c5ae4781")
     if response:
         print("Success! Image URL is {}".format(response['url']))
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     upload_file_example()
     upload_url_example()
 
-    new_image = CapellaApi()
+    new_image = Capella()
     response = new_image.upload_file("../samples/image.jpg")
     assert response['success'] == True
 

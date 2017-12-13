@@ -6,7 +6,7 @@ import requests
 import logging
 
 
-class CapellaApi:
+class Capella:
     """
     Python SDK for Capella
     @Website: https://capella.pics
