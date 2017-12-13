@@ -131,16 +131,25 @@ class CapellaApi:
         url = ''
         for filter, params in self.filters:
             try:
-                if filter == "crop" and len(params) == 4:
-                    url += '/{}/{}x{}&{},{}'.format(filter, *params)
+                if filter == "crop":
+                    if len(params) == 4:
+                        url += '/crop/{}x{}&{},{}'.format(*params)
+                    elif len(params) == 2:
+                        url += '/crop/{}x{}'.format(*params)
+                    else:
+                        raise Exception("Unexpected arguments count during crop: {}".format(','.join(params)))
+
                 elif filter == "pixelize":
                     url += '/{}/{}'.format(filter, params)
+
                 elif filter == 'resize':
                     url += '/{}/{}x{}'.format(filter, *params)
+
                 else:
                     raise Exception("Unexpected filter {}".format(filter))
+
             except Exception as e:
-                logging.error("[upload] error: {}".format(e))
+                logging.error("[upload] error during filter {}/{} processing: {}".format(filter, ','.join([str(param) for param in params]), e))
 
         if not self.url:
             logging.warning("[upload file before applying filters]")
