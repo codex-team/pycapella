@@ -1,6 +1,8 @@
 Pycapella
 =========
 
+.. image:: https://travis-ci.org/codex-team/pycapella.svg?branch=master
+
 Python SDK for `capella.pics`_
 
 Installation
