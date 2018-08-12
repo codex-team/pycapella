@@ -36,17 +36,18 @@ class Capella:
             logging.error("[uploadUrl runtime error]: {}".format(e))
             return False
 
-    def upload_file(self, file_path):
+    def upload_file(self, file_path, raw_input=False):
         """
         Upload local file to Capella
         :param file_path: local file path for uploading to Capella
+        :param raw_input: True if file_path is image raw bytes
         :return: False if error or response if success (watch doc for self.processRespose)
         """
-        if not os.path.isfile(file_path):
+        if not raw_input and not os.path.isfile(file_path):
             logging.error("[uploadFile] file not found: {}".format(file_path))
             return False
         try:
-            files = {'file': open(file_path, 'rb')}
+            files = {'file': file_path} if raw_input else {'file': open(file_path, 'rb')}
             response = requests.post(self.API_URL, files=files)
             return self.process_respose(response)
 
@@ -61,8 +62,13 @@ class Capella:
         :return: response: dictionary(
             'success' – True or False (mandatory)
             'message' – Description of the result (mandatory)
-            'id' – Image ID from Capella API (optional)
-            'url' – Image URL from Capella API (optional)
+            'id' – Image ID from Capella API
+            'url' – Image URL from Capella API
+            'mime' – Mime type of the uploaded image
+            'width' – Image's width
+            'height' – Image's height
+            'color' – Average hex color of the image
+            'size' – Image's size in bytes
         )
         """
         if response.status_code != 200:
