@@ -5,4 +5,4 @@ pycapella.egg-info
 .DS_Store
 .idea
 .cache
-.venv
+venv/
