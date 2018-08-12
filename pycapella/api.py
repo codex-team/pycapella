@@ -40,6 +40,7 @@ class Capella:
         """
         Upload local file to Capella
         :param file_path: local file path for uploading to Capella
+        :param raw_input: True if file_path is image raw bytes
         :return: False if error or response if success (watch doc for self.processRespose)
         """
         if not raw_input and not os.path.isfile(file_path):
@@ -61,8 +62,13 @@ class Capella:
         :return: response: dictionary(
             'success' – True or False (mandatory)
             'message' – Description of the result (mandatory)
-            'id' – Image ID from Capella API (optional)
-            'url' – Image URL from Capella API (optional)
+            'id' – Image ID from Capella API
+            'url' – Image URL from Capella API
+            'mime' – Mime type of the uploaded image
+            'width' – Image's width
+            'height' – Image's height
+            'color' – Average hex color of the image
+            'size' – Image's size in bytes
         )
         """
         if response.status_code != 200:
