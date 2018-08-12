@@ -36,17 +36,17 @@ class Capella:
             logging.error("[uploadUrl runtime error]: {}".format(e))
             return False
 
-    def upload_file(self, file_path):
+    def upload_file(self, file_path, raw_input=False):
         """
         Upload local file to Capella
         :param file_path: local file path for uploading to Capella
         :return: False if error or response if success (watch doc for self.processRespose)
         """
-        if not os.path.isfile(file_path):
+        if not raw_input and not os.path.isfile(file_path):
             logging.error("[uploadFile] file not found: {}".format(file_path))
             return False
         try:
-            files = {'file': open(file_path, 'rb')}
+            files = {'file': file_path} if raw_input else {'file': open(file_path, 'rb')}
             response = requests.post(self.API_URL, files=files)
             return self.process_respose(response)
 
