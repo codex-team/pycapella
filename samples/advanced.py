@@ -37,8 +37,8 @@ def crop_resize_and_pixelize_in_one_line(api):
 
 def upload_raw_bytes_example():
     api = Capella()
-    bytes = open("image.jpg", "rb").read()
-    response = api.upload_file(bytes, raw_input=True)
+    raw_bytes = open("image.jpg", "rb").read()
+    response = api.upload_file(raw_bytes, raw_input=True)
     if response:
         print("Success! Image URL is {}".format(response['url']))
     else:
